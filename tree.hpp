@@ -24,6 +24,11 @@ class BinaryTree {
 private:
     Node* root; // Root of the binary tree
 
+    // Private traversal helper methods
+    void inorder(Node* node);    // Inorder Traversal (Left, Root, Right)
+    void preorder(Node* node);   // Preorder Traversal (Root, Left, Right)
+    void postorder(Node* node);  // Postorder Traversal (Left, Right, Root)
+
 public:
     // Constructor
     BinaryTree();
@@ -40,10 +45,10 @@ public:
     // Search for a specific feature
     void search(std::string name);
 
-    //DeleteTree
+    // Delete the tree
     void deleteTree(Node*node);
 
-    //Traverse function
+    // Traverse the tree
     void traversetree(std::string input);
 };
 
