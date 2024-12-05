@@ -29,13 +29,19 @@ Node* addNode(Node* current, std::string name, std::string type, std::string met
     }
 
     // Example condition: Rivers go to the left, others to the right
-    if (type == "River") {
+    if (type == "left") {
         current->left = addNode(current->left, name, type, metadata);
-    } else {
+    } else if(type == "right") {
         current->right = addNode(current->right, name, type, metadata);
+    } else {
+        std::cout << "Invalid type, try again";
     }
 
     return current;
+}
+
+void BinaryTree::traversetree(std::string s) {
+    
 }
 
 //Display Method

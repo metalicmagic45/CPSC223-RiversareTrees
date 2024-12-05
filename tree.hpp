@@ -42,6 +42,9 @@ public:
 
     //DeleteTree
     void deleteTree(Node*node);
+
+    //Traverse function
+    void traversetree(std::string input);
 };
 
 #endif // BINARYTREE_HPP
