@@ -16,13 +16,7 @@ int main() {
     tree.add("Columbia River", "root", "Length: 1243 miles");
     tree.add("Snake River", "left", "Length: 1078 miles");
     tree.add("Willamette River", "right", "Length: 187 miles");
-    tree.add("Kootenay River", "left", "Length: 485 miles");
-    tree.add("Pend Oreille River", "right", "Length: 130 miles");
-    tree.add("Spokane River", "left", "Length: 111 miles");
-    tree.add("Yakima River", "right", "Length: 214 miles");
-    tree.add("Deschutes River", "left", "Length: 252 miles");
-    tree.add("Cowlitz River", "right", "Length: 105 miles");
-    tree.add("John Day River", "left", "Length: 284 miles");
+    tree.add("Kootenay River", "right", "Length: 485 miles");
 
     // Test inorder traversal
     cout << "Tree Traversal:\n";

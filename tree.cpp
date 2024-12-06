@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <queue>
+#include <limits>
 
 using std::cout;
 using std::endl;
@@ -48,6 +49,18 @@ Node* addNode(Node* current, Node* parent, string name, string type, string meta
     return current;
 }
 
+void BinaryTree::addAt(Node* start, Node* parent, string name, string type, string metadata) {
+    if(start == nullptr) {
+        if(root == nullptr) {
+            root = addNode(start, start->parent, name, type, metadata);
+        } else {
+            std::cout << "Cannot add root node.";
+        }
+    } else {
+        addNode(start, start->parent, name, type, metadata); //Add at node
+    }
+}
+
 // Public add method
 void BinaryTree::add(string name, string type, string metadata) {
     root = addNode(root, nullptr, name, type, metadata);  // Start with no parent (root has no parent)
@@ -78,7 +91,7 @@ void BinaryTree::traversetree() {
         inorder(root); // Start traversal from the root
     } else {
         int input;
-        cout << "Input integers, 1: right, 2: left, 3: parent, -1: break\n";
+        cout << "Input integers, 1: right, 2: left, 3: parent, 4: add(if allowed), -1: break\n";
         printTree(current,"", false);
         while(input != -1) {
             std::cout << "Input: ";
@@ -104,6 +117,27 @@ void BinaryTree::traversetree() {
                 }
                 current = current->parent;
                 printTree(current, "", false);
+            } else if (input == 4) {
+                std::string name;
+                std::string t;
+                std::string metadata;
+                if((current->left != nullptr) || (current->right != nullptr)) {
+                    std::cout << "Not allowed to add\n";
+                    continue;
+                }
+                std::cout << "You can add, enter inputs:\n";
+                std::cout << "Enter name: ";
+                std::cin >> name;
+                std::cout << "Enter left or right: ";
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin >> t;
+                std::cout << "Enter metadata: ";
+                std::cin >> metadata; 
+                addAt(current, current->parent, name, t, metadata);
+                printTree(current, "", false);
+            } else {
+                std::cout << "Invalid input: Breaking";
+                break;
             }
         }
     }

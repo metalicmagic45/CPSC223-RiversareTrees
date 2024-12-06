@@ -1,6 +1,3 @@
-#ifndef BINARYTREE_HPP
-#define BINARYTREE_HPP
-
 #include <string>
 #include <iostream>
 
@@ -45,12 +42,11 @@ public:
 
     // Add a node to the tree
     void add(string name, string type, string metadata);
+    void addAt(Node* start, Node* parent, string name, string type, string metadata);
 
     // Display the tree structure
     void display();
     void printTree(Node *node, std::string indent, bool last);
-
-
 
     // Search for a specific feature
     void search(string name);
@@ -61,5 +57,3 @@ public:
     // Traverse the tree
     void traversetree();
 };
-
-#endif // BINARYTREE_HPP
