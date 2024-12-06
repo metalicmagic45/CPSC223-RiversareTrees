@@ -14,6 +14,7 @@ struct Node {
     string metadata;   // Metadata (e.g., length, capacity, etc.)
     Node* left;             // Left child
     Node* right;            // Right child
+    Node* parent;
 
     // Constructor
     Node(string n, string t, string m) {
@@ -22,6 +23,7 @@ struct Node {
         metadata = m;     
         left = nullptr;     
         right = nullptr;
+        parent = nullptr;
     } 
 };
 

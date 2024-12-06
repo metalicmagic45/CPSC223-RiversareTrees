@@ -28,17 +28,19 @@ void BinaryTree::deleteTree(Node* node) {
     delete node;
 }
 
-// Recursive helper to add a node
-Node* addNode(Node* current, string name, string type, string metadata) {
+// Recursive helper to add a node with a parent
+Node* addNode(Node* current, Node* parent, string name, string type, string metadata) {
     if (current == nullptr) {
-        return new Node(name, type, metadata);
+        Node* newNode = new Node(name, type, metadata);
+        newNode->parent = parent;  // Set the parent of the new node
+        return newNode;
     }
 
-// Example condition: Rivers go to the left, others to the right
+    // Example condition: Rivers go to the left, others to the right
     if (type == "left") {
-        current->left = addNode(current->left, name, type, metadata);
+        current->left = addNode(current->left, current, name, type, metadata);
     } else if (type == "right") {
-        current->right = addNode(current->right, name, type, metadata);
+        current->right = addNode(current->right, current, name, type, metadata);
     } else {
         cout << "Invalid type, try again\n";
     }
@@ -48,8 +50,9 @@ Node* addNode(Node* current, string name, string type, string metadata) {
 
 // Public add method
 void BinaryTree::add(string name, string type, string metadata) {
-    root = addNode(root, name, type, metadata);
+    root = addNode(root, nullptr, name, type, metadata);  // Start with no parent (root has no parent)
 }
+
 
 // Inorder traversal
 void BinaryTree::inorder(Node* node) {
@@ -75,7 +78,7 @@ void BinaryTree::traversetree() {
         inorder(root); // Start traversal from the root
     } else {
         int input;
-        cout << "Input 1 or 2, 1: right, 2: left, -1: break\n";
+        cout << "Input integers, 1: right, 2: left, 3: parent, -1: break\n";
         printTree(current,"", false);
         while(input != -1) {
             std::cout << "Input: ";
@@ -94,6 +97,13 @@ void BinaryTree::traversetree() {
                 }
                 current = current->left;
                     printTree(current,"", false);
+            } else if (input == 3) {
+                if(current == root) {
+                    std::cout << "At root\n";
+                    continue;
+                }
+                current = current->parent;
+                printTree(current, "", false);
             }
         }
     }
