@@ -2,16 +2,21 @@
 #define BINARYTREE_HPP
 
 #include <string>
+#include <iostream>
+
+using std::cout;
+using std::endl;
+using std::string;
 
 struct Node {
-    std::string name;       // Name of the water body or dam
-    std::string type;       // Type (e.g., River, Lake, Dam)
-    std::string metadata;   // Metadata (e.g., length, capacity, etc.)
+    string name;       // Name of the water body or dam
+    string type;       // Type (e.g., River, Lake, Dam)
+    string metadata;   // Metadata (e.g., length, capacity, etc.)
     Node* left;             // Left child
     Node* right;            // Right child
 
     // Constructor
-    Node(std::string n, std::string t, std::string m) {
+    Node(string n, string t, string m) {
         name = n;     
         type = t;
         metadata = m;     
@@ -37,19 +42,22 @@ public:
     ~BinaryTree();
 
     // Add a node to the tree
-    void add(std::string name, std::string type, std::string metadata);
+    void add(string name, string type, string metadata);
 
     // Display the tree structure
     void display();
+    void printTree(Node *node, std::string indent, bool last);
+
+
 
     // Search for a specific feature
-    void search(std::string name);
+    void search(string name);
 
     // Delete the tree
     void deleteTree(Node*node);
 
     // Traverse the tree
-    void traversetree(std::string input);
+    void traversetree(string input);
 };
 
 #endif // BINARYTREE_HPP

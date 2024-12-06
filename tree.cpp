@@ -1,5 +1,13 @@
 #include "tree.hpp"
 #include <iostream>
+#include <string>
+#include <queue>
+
+using std::cout;
+using std::endl;
+using std::string;
+using std::queue;
+
 
 // Constructor
 BinaryTree::BinaryTree() {
@@ -21,7 +29,7 @@ void BinaryTree::deleteTree(Node* node) {
 }
 
 // Recursive helper to add a node
-Node* addNode(Node* current, std::string name, std::string type, std::string metadata) {
+Node* addNode(Node* current, string name, string type, string metadata) {
     if (current == nullptr) {
         return new Node(name, type, metadata);
     }
@@ -32,14 +40,14 @@ Node* addNode(Node* current, std::string name, std::string type, std::string met
     } else if (type == "right") {
         current->right = addNode(current->right, name, type, metadata);
     } else {
-        std::cout << "Invalid type, try again\n";
+        cout << "Invalid type, try again\n";
     }
 
     return current;
 }
 
 // Public add method
-void BinaryTree::add(std::string name, std::string type, std::string metadata) {
+void BinaryTree::add(string name, string type, string metadata) {
     root = addNode(root, name, type, metadata);
 }
 
@@ -51,21 +59,44 @@ void BinaryTree::inorder(Node* node) {
     inorder(node->left);
 
     // Visit current node
-    std::cout << node->name << " (" << node->type << "): " << node->metadata << "\n";
+    cout << node->name << " (" << node->type << "): " << node->metadata << "\n";
 
     inorder(node->right);
 }
 
-void BinaryTree::traversetree(std::string s) {
+void BinaryTree::traversetree(string s) {
     if (s == "inorder") {
-        std::cout << "Inorder Traversal:\n";
+        cout << "Inorder Traversal:\n";
         inorder(root); // Start traversal from the root
     } else {
-        std::cout << "Invalid traversal type. Only 'inorder' is supported right now.\n";
+        cout << "Invalid traversal type. Only 'inorder' is supported right now.\n";
     }
 }
 
-// Display method
+
+// Display method 
 void BinaryTree::display() {
-    std::cout << "Display method not implemented yet.\n";
+  if (root == nullptr) {
+    cout << "Tree is empty.\n";
+    return;
+  }
+  cout << endl;
+  printTree(root, "", false); 
+}
+void BinaryTree::printTree(Node *node, std::string indent, bool last) {
+  if (node != nullptr) {
+    std::cout << indent;
+    if (last) {
+      std::cout << "└── ";
+      indent += "    ";
+    } else {
+      std::cout << "├── ";
+      indent += "│   ";
+    }
+
+    std::cout << node->name << std::endl;
+
+    printTree(node->left, indent, false); 
+    printTree(node->right, indent, true);  
+  }
 }

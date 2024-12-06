@@ -1,8 +1,13 @@
 #include "tree.hpp"
 #include <iostream>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::string;
 
 int main() {
-    std::cout << "Program started successfully.\n";
+    cout << "Program started successfully.\n";
     BinaryTree tree;
 
     // Add nodes to the tree
@@ -14,5 +19,9 @@ int main() {
     // Test inorder traversal
     tree.traversetree("inorder");
 
+    //test display
+    tree.display();
+
     return 0;
 }
+
