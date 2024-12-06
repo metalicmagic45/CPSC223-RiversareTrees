@@ -54,6 +54,10 @@ public:
     // Delete the tree
     void deleteTree(Node*node);
 
+    // Delete a Node
+    void deleteNode(string name);
+    Node* deleteNodeRec(Node* node, string name);
+
     // Traverse the tree
     void traversetree();
 };

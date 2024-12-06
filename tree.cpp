@@ -29,6 +29,56 @@ void BinaryTree::deleteTree(Node* node) {
     delete node;
 }
 
+void BinaryTree::deleteNode(string name) {
+    root = deleteNodeRec(root, name);
+}
+
+Node* BinaryTree::deleteNodeRec(Node* node, string name) {
+    if(node == nullptr) {
+        cout << "Node not found. \n";
+        return node;
+    }
+
+    if (node->name == name) {
+        // Node with only one child or no child
+        if (node->left == nullptr) {
+            Node* temp = node->right;
+            if (temp != nullptr) temp->parent = node->parent;
+            delete node;
+            return temp;
+        } else if (node->right == nullptr) {
+            Node* temp = node->left;
+            if (temp != nullptr) temp->parent = node->parent;
+            delete node;
+            return temp;
+        }
+
+        // Node with two children: find the in-order successor 
+        Node* successor = node->right;
+        while (successor->left != nullptr) {
+            successor = successor->left; // Traverse to the leftmost node
+        }
+        // Replace current node's data with the successor's data
+        node->name = successor->name;
+        node->type = successor->type;
+        node->metadata = successor->metadata;
+
+         // Delete the successor node
+        node->right = deleteNodeRec(node->right, successor->name);
+    } else if (node->type == "left") { 
+        node->left = deleteNodeRec(node->left, name);
+    } else if( node -> type == "right") {
+        node->right = deleteNodeRec(node->right, name);
+    } else {
+        cout << "Invalid Node Type. \n";
+    }
+
+    return node;
+
+
+}
+
+
 // Recursive helper to add a node with a parent
 Node* addNode(Node* current, Node* parent, string name, string type, string metadata) {
     if (current == nullptr) {
