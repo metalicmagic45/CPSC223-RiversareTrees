@@ -121,7 +121,7 @@ void BinaryTree::traversetree() {
                 std::string name;
                 std::string t;
                 std::string metadata;
-                if((current->left != nullptr) || (current->right != nullptr)) {
+                if((current->left != nullptr) && (current->right != nullptr)) {
                     std::cout << "Not allowed to add\n";
                     continue;
                 }
@@ -131,6 +131,14 @@ void BinaryTree::traversetree() {
                 std::cout << "Enter left or right: ";
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cin >> t;
+                if(t == "left" && current->left != nullptr) {
+                    std::cout << "Not allowed";
+                    continue;
+                }
+                if(t == "right" && current->right != nullptr) {
+                    std::cout << "Not allowed";
+                    continue;
+                }
                 std::cout << "Enter metadata: ";
                 std::cin >> metadata; 
                 addAt(current, current->parent, name, t, metadata);
