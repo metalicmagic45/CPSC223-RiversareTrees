@@ -7,6 +7,7 @@ using std::endl;
 using std::string;
 
 int main() {
+
     cout << "Program started successfully.\n";
     BinaryTree tree;
 
@@ -17,10 +18,7 @@ int main() {
     tree.add("Bonneville Dam", "right", "Capacity: 537,000 acre-feet");
 
     // Test inorder traversal
-    tree.traversetree("inorder");
-
-    //test display
-    tree.display();
+    tree.traversetree();
 
     return 0;
 }

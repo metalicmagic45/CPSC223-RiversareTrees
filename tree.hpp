@@ -57,7 +57,7 @@ public:
     void deleteTree(Node*node);
 
     // Traverse the tree
-    void traversetree(string input);
+    void traversetree();
 };
 
 #endif // BINARYTREE_HPP
