@@ -107,16 +107,41 @@ void BinaryTree::inorder(Node* node) {
     inorder(node->right);
 }
 
+// Preorder traversal (Root, Left, Right)
+void BinaryTree::preorder(Node* node) {
+    if (!node) return;
+
+    cout << node->name << " (" << node->type << "): " << node->metadata << "\n";
+    preorder(node->left);
+    preorder(node->right);
+}
+
+// Postorder traversal (Left, Right, Root)
+void BinaryTree::postorder(Node* node) {
+    if (!node) return;
+
+    postorder(node->left);
+    postorder(node->right);
+    cout << node->name << " (" << node->type << "): " << node->metadata << "\n";
+}
+
+
 void BinaryTree::traversetree() {
     Node* current = root;
     std::string s;
     cout << "Type: 'inorder' to do inorder traversal. Type something else to go to tree traversal\n";
     std::cout << "Input: ";
     std::cin >> s;
-    if (s == "inorder") {
-        cout << "Inorder Traversal:\n";
-        inorder(root); // Start traversal from the root
-    } else {
+if (s == "inorder") {
+    cout << "Inorder Traversal:\n";
+    inorder(root); // Start traversal from the root
+} else if (s == "preorder") { // Preorder
+    cout << "\nPreorder Traversal:\n";
+    preorder(root);
+} else if (s == "postorder") { // Postorder
+    cout << "\nPostorder Traversal:\n";
+    postorder(root);
+} else {
         int input;
         cout << "Input integers, 1: right, 2: left, 3: parent, 4: add(if allowed), 5: delete, -1: break\n";
         printTree(current,"", false);
