@@ -33,6 +33,8 @@ private:
     void preorder(Node* node);   // Preorder Traversal (Root, Left, Right)
     void postorder(Node* node);  // Postorder Traversal (Left, Right, Root)
 
+    Node* searchNode(Node* current, const string& name); // Search for a node by name
+
 public:
     // Constructor
     BinaryTree();

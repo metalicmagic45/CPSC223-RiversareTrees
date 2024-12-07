@@ -125,6 +125,18 @@ void BinaryTree::postorder(Node* node) {
     cout << node->name << " (" << node->type << "): " << node->metadata << "\n";
 }
 
+Node* BinaryTree::searchNode(Node* current, const string& name) {
+    if (!current) return nullptr;  // Base case: node not found
+
+    if (current->name == name) return current;  // Node found
+
+    // Search recursively in the left and right subtrees
+    Node* found = searchNode(current->left, name);
+    if (found) return found;  // If found in left subtree, return it
+
+    return searchNode(current->right, name);  // Otherwise, search in the right subtree
+}
+
 
 void BinaryTree::traversetree() {
     Node* current = root;
@@ -143,7 +155,7 @@ if (s == "inorder") {
     postorder(root);
 } else {
         int input;
-        cout << "Input integers, 1: right, 2: left, 3: parent, 4: add(if allowed), 5: delete, -1: break\n";
+        cout << "Input integers, 1: right, 2: left, 3: parent, 4: add(if allowed), 5: delete, 6: search, -1: break\n";
         printTree(current,"", false);
         while(input != -1) {
             if (root == nullptr) {
@@ -214,14 +226,28 @@ if (s == "inorder") {
                     continue;
                 }
                 deleteNode(current->name);  
-            } else{
-                std::cout << "Invalid input: Breaking";
+            } else if (input == 6) { // Search option
+                cout << "Enter the name of the node to search for: ";
+                string nodeName;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::getline(std::cin, nodeName); // Allow multi-word names
+
+                Node* target = searchNode(root, nodeName);
+                if (target) {
+                    cout << "Found Node: " << target->name << " (" << target->type
+                         << "): " << target->metadata << "\n";
+                } else {
+                    cout << "Node not found.\n";
+                }
+            } else if (input == -1) {
+                break;
+            } else {
+                std::cout << "Invalid input: Breaking\n";
                 break;
             }
         }
     }
 }
-
 
 // Display method 
 void BinaryTree::display() {
