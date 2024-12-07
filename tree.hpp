@@ -56,7 +56,7 @@ public:
 
     // Delete a Node
     void deleteNode(string name);
-    Node* deleteNodeRec(Node* node, string name);
+    Node* deleteNodeRec(Node* node, const string &name);
 
     // Traverse the tree
     void traversetree();

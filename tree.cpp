@@ -30,54 +30,31 @@ void BinaryTree::deleteTree(Node* node) {
 }
 
 void BinaryTree::deleteNode(string name) {
+    cout << "Deleting " << name << std::endl;
     root = deleteNodeRec(root, name);
 }
 
-Node* BinaryTree::deleteNodeRec(Node* node, string name) {
-    if(node == nullptr) {
-        cout << "Node not found. \n";
-        return node;
+Node* BinaryTree::deleteNodeRec(Node* node, const string &name) {
+    if (node == nullptr) {
+        // Node not found
+        return nullptr;
     }
 
     if (node->name == name) {
-        // Node with only one child or no child
-        if (node->left == nullptr) {
-            Node* temp = node->right;
-            if (temp != nullptr) temp->parent = node->parent;
-            delete node;
-            return temp;
-        } else if (node->right == nullptr) {
-            Node* temp = node->left;
-            if (temp != nullptr) temp->parent = node->parent;
-            delete node;
-            return temp;
-        }
-
-        // Node with two children: find the in-order successor 
-        Node* successor = node->right;
-        while (successor->left != nullptr) {
-            successor = successor->left; // Traverse to the leftmost node
-        }
-        // Replace current node's data with the successor's data
-        node->name = successor->name;
-        node->type = successor->type;
-        node->metadata = successor->metadata;
-
-         // Delete the successor node
-        node->right = deleteNodeRec(node->right, successor->name);
-    } else if (node->type == "left") { 
-        node->left = deleteNodeRec(node->left, name);
-    } else if( node -> type == "right") {
-        node->right = deleteNodeRec(node->right, name);
-    } else {
-        cout << "Invalid Node Type. \n";
+        // If we've found the node, delete its entire subtree
+        deleteTree(node); // deleteTree(node) deletes node and all its descendants
+        return nullptr;   // Return nullptr so parent's pointer to this node is cleared
     }
 
+    // Recursively search the left subtree
+    node->left = deleteNodeRec(node->left, name);
+    // Recursively search the right subtree
+    node->right = deleteNodeRec(node->right, name);
+
+    // If we reach here, it means we didn't find the node in this path,
+    // so just return the node unchanged.
     return node;
-
-
 }
-
 
 // Recursive helper to add a node with a parent
 Node* addNode(Node* current, Node* parent, string name, string type, string metadata) {
@@ -133,7 +110,7 @@ void BinaryTree::inorder(Node* node) {
 void BinaryTree::traversetree() {
     Node* current = root;
     std::string s;
-    cout << "Type: 'inorder' to do inorder traversal\n";
+    cout << "Type: 'inorder' to do inorder traversal. Type something else to go to tree traversal\n";
     std::cout << "Input: ";
     std::cin >> s;
     if (s == "inorder") {
@@ -141,11 +118,24 @@ void BinaryTree::traversetree() {
         inorder(root); // Start traversal from the root
     } else {
         int input;
-        cout << "Input integers, 1: right, 2: left, 3: parent, 4: add(if allowed), -1: break\n";
+        cout << "Input integers, 1: right, 2: left, 3: parent, 4: add(if allowed), 5: delete, -1: break\n";
         printTree(current,"", false);
         while(input != -1) {
+            if (root == nullptr) {
+                cout << "Tree is empty\n";
+                current = nullptr; // No more nodes to traverse
+            }  
             std::cout << "Input: ";
             std::cin >> input;
+            if(root == nullptr) {
+                if(input == -1) {
+                    break;
+                }
+                if(input == ((1) || (2) || (3) || (4) || (5))) {
+                    std::cout << "Not allowed, tree empty\n";
+                    continue;
+                }
+            }
             if(input == 1) {  
                 if(current->right == nullptr) {
                     std::cout << "End of right branch\n";
@@ -193,7 +183,13 @@ void BinaryTree::traversetree() {
                 std::cin >> metadata; 
                 addAt(current, current->parent, name, t, metadata);
                 printTree(current, "", false);
-            } else {
+            } else if(input == 5) {
+                if(current == nullptr) {
+                    cout << "Node doesn't exist\n";
+                    continue;
+                }
+                deleteNode(current->name);  
+            } else{
                 std::cout << "Invalid input: Breaking";
                 break;
             }
