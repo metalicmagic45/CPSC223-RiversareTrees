@@ -1,0 +1,67 @@
+Add
+•	Purpose: To add a new node to the binary tree at a specified position (left or right).
+•	Assumptions: The position (left or right) is valid based on binary tree rules. There is sufficient memory to allocate a new node.
+•	Inputs:
+string name: The name of the river (e.g., "Snake River").
+string type: The type of node in the tree, either "left" or "right".
+string metadata: Additional details about the river (e.g., length, notable dam).
+•	Output: Adds a new node to the tree structure and updates its relationships. Returns no value explicitly.
+•	State Changes: A new node is created and added to the binary tree structure at the specified position.  The tree's size increases by 1.
+•	Cases and Expected Behavior:
+If the parent node has an empty position on the specified side (left/right), the new node is added successfully.
+If the position is already occupied or invalid, no action is taken, and an error message is displayed.
+Delete
+•	Purpose: To remove a node and its subtree from the binary tree based on the river's name.
+•	Assumptions: The node to delete exists in the binary tree. The node’s parent-child relationships can be properly updated.
+•	Inputs: string name - The name of the river to delete.
+•	Outputs: Deletes the node and its subtree.
+•	State Changes: The specified node is removed, and its children are also removed. The tree's size decreases by the number of nodes that are deleted.
+•	Cases and Expected Behavior:
+If the specified node exists, it and its subtree are deleted, and the structure is updated.
+If the specified node does not exist, no deletion occurs, and an error message is displayed.
+Search
+•	Purpose: To locate a node in the binary tree by its name and return its details.
+•	Assumptions: The tree is properly structured. The name provided is unique for each node.
+•	Inputs: string name - The name of the node to search for.
+•	Outputs: The details (name, type, and metadata) of the node if found. If not found, displays a "Node not found" message.
+•	State Changes: None.
+•	Cases and Expected Behavior:
+If the node exists, its details are displayed.
+If the node does not exist, a message is displayed
+
+
+Traversals
+•	Purpose: To traverse and display the binary tree using one of the three methods: Inorder, Preorder, or Postorder.
+•	Assumptions: The binary tree is not empty. The user provides a valid traversal command.
+•	Inputs: Traversal command - "inorder", "preorder", or "postorder".
+•	Outputs: Prints the details of each node in the specified traversal order.
+•	State Changes: None.
+•	Cases and Expected Behavior:
+If the tree is not empty, the nodes are printed in the specified order.
+If the tree is empty, a "Tree is empty" message is displayed.
+Display
+•	Purpose: To display the structure of the binary tree visually, showing parent-child relationships.
+•	Assumptions: The tree is properly structured.
+•	Inputs: None.
+•	Outputs: Prints a visual representation of the binary tree.
+•	State Changes: None.
+•	Cases and Expected Behavior:
+If the tree is not empty, the structure is printed, showing the hierarchy of nodes.
+If the tree is empty, a "Tree is empty" message is displayed.
+Get Parent
+•	Purpose: To find and return the parent node of a given node.
+•	Assumptions: The node whose parents are being queried exists in the binary tree.
+•	Inputs: Node* child - A pointer to the child node whose parent is to be retrieved.
+•	Outputs: A pointer to the parent node if it exists, or nullptr if the node is the root or does not exist.
+•	State Changes: None.
+•	Cases and Expected Behavior:
+If the node exists and is not the root, the parent node is returned.
+If the node is the root or does not exist, nullptr is returned.
+Get Root
+•	Purpose: To retrieve the root node of the binary tree.
+•	Assumptions: The binary tree is properly initialized.
+•	Inputs: None.
+•	Outputs: A pointer to the root node of the binary tree.
+•	State Changes: None.
+•	Cases and Expected Behavior:
+If the tree is not empty, the root node is returned. If the tree is empty, nullptr is returned.
