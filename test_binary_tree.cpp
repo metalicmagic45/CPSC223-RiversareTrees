@@ -54,19 +54,103 @@ void test_traversals() {
 }
 
 // Test deleting nodes
+void test_delete_nodes() {
+    cout << "Running test_delete_nodes...\n";
 
+    BinaryTree tree;
 
+    // Add nodes to the tree
+    tree.add("Columbia River", "root", "Length: 1243 miles");
+    tree.add("Snake River", "left", "Length: 1078 miles");
+    tree.add("Willamette River", "right", "Length: 187 miles");
+
+    // Display tree before deletion
+    cout << "\nTree Before Deleting 'Snake River':\n";
+    tree.display();
+
+    // Delete a node
+    tree.deleteNode("Snake River");
+
+    // Display tree after deletion
+    cout << "\nTree After Deleting 'Snake River':\n";
+    tree.display();
+
+    // Verify by traversal
+    cout << "\nInorder Traversal After Deletion:\n";
+    tree.traversetree(); // Should prompt for "inorder"
+
+    cout << "test_delete_nodes passed.\n\n";
+}
+
+void test_search_nodes() {
+    cout << "Running test_search_nodes...\n";
+
+    BinaryTree tree;
+
+    // Add nodes to the tree
+    tree.add("Columbia River", "root", "Length: 1243 miles");
+    tree.add("Snake River", "left", "Length: 1078 miles");
+    tree.add("Willamette River", "right", "Length: 187 miles");
+
+    // Search for existing nodes
+    cout << "\nSearching for 'Snake River':\n";
+    Node* result = tree.searchNode(tree.getRoot(),"Snake River");
+    if (result) {
+        cout << "Found Node: " << result->name << " (" << result->type 
+             << "): " << result->metadata << "\n";
+    } else {
+        cout << "Node not found.\n";
+    }
+    assert(result != nullptr && result->name == "Snake River");
+
+    // Search for a non-existing node
+    cout << "\nSearching for 'Mississippi River':\n";
+    result = tree.searchNode(tree.getRoot(),"Mississippi River");
+    if (result) {
+        cout << "Found Node: " << result->name << " (" << result->type 
+             << "): " << result->metadata << "\n";
+    } else {
+        cout << "Node not found.\n";
+    }
+    assert(result == nullptr);
+
+    cout << "test_search_nodes passed.\n\n";
+    
+}
 
 // Test edge cases 
+void test_edge_cases() {
+    cout << "Running test_edge_cases...\n";
 
+    BinaryTree tree;
+
+    // Edge case: Operations on an empty tree
+    cout << "\nEmpty Tree Operations:\n";
+    tree.display();
+    tree.traversetree();
+
+    // Add a single node and test
+    cout << "\nAdding a single node:\n";
+    tree.add("Columbia River", "root", "Length: 1243 miles");
+    tree.display();
+
+    // Delete the root node
+    cout << "\nDeleting the root node:\n";
+    tree.deleteNode("Columbia River");
+    tree.display();
+
+    cout << "test_edge_cases passed.\n\n";
+}
 // Main function to run all tests
 int main() {
     cout << "Starting Tests...\n\n";
 
-    test_add_nodes();
-    test_traversals();
-    //test_delete_nodes();
-    //test_edge_cases();
+   // test_add_nodes();
+   // test_traversals();
+    test_search_nodes();
+    test_delete_nodes();
+    test_edge_cases();
+    
 
     cout << "\nAll Tests Passed Successfully!\n";
     return 0;

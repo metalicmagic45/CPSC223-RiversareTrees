@@ -33,7 +33,7 @@ private:
     void preorder(Node* node);   // Preorder Traversal (Root, Left, Right)
     void postorder(Node* node);  // Postorder Traversal (Left, Right, Root)
 
-    Node* searchNode(Node* current, const string& name); // Search for a node by name
+   
 
 public:
     // Constructor
@@ -41,6 +41,9 @@ public:
 
     // Destructor
     ~BinaryTree();
+
+    // Get the root of the tree
+    Node* getRoot();
 
     // Add a node to the tree
     void add(string name, string type, string metadata);
@@ -62,4 +65,7 @@ public:
 
     // Traverse the tree
     void traversetree();
+
+    // Search for a node by name
+    Node* searchNode(Node* current, const string& name); 
 };

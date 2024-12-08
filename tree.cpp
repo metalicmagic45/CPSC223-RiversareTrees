@@ -29,6 +29,10 @@ void BinaryTree::deleteTree(Node* node) {
     delete node;
 }
 
+Node* BinaryTree:: getRoot() {
+    return root;
+}
+
 void BinaryTree::deleteNode(string name) {
     cout << "Deleting " << name << std::endl;
     root = deleteNodeRec(root, name);
