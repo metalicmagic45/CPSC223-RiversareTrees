@@ -93,8 +93,9 @@ void test_search_nodes() {
     tree.add("Willamette River", "right", "Length: 187 miles");
 
     // Search for existing nodes
+    string nodeName = "Snake River";
     cout << "\nSearching for 'Snake River':\n";
-    Node* result = tree.searchNode(tree.getRoot(),"Snake River");
+    Node* result = tree.searchNode(tree.getRoot(),nodeName);
     if (result) {
         cout << "Found Node: " << result->name << " (" << result->type 
              << "): " << result->metadata << "\n";
