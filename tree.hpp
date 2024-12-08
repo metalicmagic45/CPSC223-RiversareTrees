@@ -44,6 +44,8 @@ public:
 
     // Get the root of the tree
     Node* getRoot();
+    Node* getParent(Node* node);
+
 
     // Add a node to the tree
     void add(string name, string type, string metadata);
@@ -57,7 +59,7 @@ public:
     void search(string name);
 
     // Delete the tree
-    void deleteTree(Node*node);
+    void deleteTree(Node* node);
 
     // Delete a Node
     void deleteNode(string name);
